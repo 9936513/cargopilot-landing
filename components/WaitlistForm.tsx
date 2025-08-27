@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { supabase } from "../supabaseClient";
+import CheckoutButton from "./CheckoutButton"; // 👈 add import
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -84,9 +85,15 @@ export default function WaitlistForm() {
         {loading ? "Joining..." : "Join Waitlist"}
       </button>
 
+      {/* Success/Error message */}
       {message && (
         <p className="text-center text-sm text-gray-300 mt-2">{message}</p>
       )}
+
+      {/* Stripe Checkout Button */}
+      <div className="pt-4">
+        <CheckoutButton />
+      </div>
     </form>
   );
 }
